@@ -1,0 +1,48 @@
+// ************************************************************************** //
+//                                                                            //
+//                                                        :::      ::::::::   //
+//   RetroGame.hpp                                      :+:      :+:    :+:   //
+//                                                    +:+ +:+         +:+     //
+//   By: ollevche <ollevche@student.unit.ua>        +#+  +:+       +#+        //
+//                                                +#+#+#+#+#+   +#+           //
+//   Created: 2018/10/06 14:35:09 by ollevche          #+#    #+#             //
+//   Updated: 2018/10/06 14:35:09 by ollevche         ###   ########.fr       //
+//                                                                            //
+// ************************************************************************** //
+
+#ifndef RETROGAME_HPP
+# define RETROGAME_HPP
+
+# include "general.hpp"
+
+class AGameEntity;
+struct EntityList;
+
+class RetroGame {
+
+	public:
+
+		RetroGame();
+		RetroGame(RetroGame const & src);
+		~RetroGame();
+
+		RetroGame & operator=(RetroGame const & src);
+
+		void			playGame();
+		WINDOW &		getStage() const;
+		AGameEntity		*getCollision(AGameEntity & elem) const;
+
+
+	private:
+
+		EntityList	*pool;
+		WINDOW		*gameStage;
+		WINDOW		*statsBar;
+
+		void	executeCycle();
+		void	controlCycle();
+		void	renderCycle();
+
+};
+
+#endif
