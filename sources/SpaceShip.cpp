@@ -15,25 +15,29 @@
 # define SHAPE "^"
 
 SpaceShip::SpaceShip() {
-    x = STAGEW / 2;
-    y = STAGEH - STAGEH / 10;
-    // TODO: color =
-    shape = strdup(SHAPE);
+	x = STAGEW / 2;
+	y = STAGEH - STAGEH / 10;
+	shape = strdup(SHAPE);
 }
 
 SpaceShip::SpaceShip(SpaceShip const & src) {
-    *this = src;
+	*this = src;
 }
 
 SpaceShip::~SpaceShip() {
-    /* DEFAULT DESTRUCTOR */
-    delete shape;
+	delete shape;
 }
 
 void SpaceShip::renderEntity(RetroGame & theGame) {
-    mvwprintw(&theGame.getStage(), y, x, shape);
+	mvwprintw(&theGame.getStage(), y, x, shape);
 }
 
 void SpaceShip::executeEntity(RetroGame & theGame) {
-    (void)theGame; // TODO: this
+	AGameEntity *entity;
+
+	// do {
+		entity = theGame.getCollision(*this); // TODO: test it
+		if (entity)
+			isDead = true;
+	// } while (entity);
 }

@@ -94,22 +94,17 @@ void RetroGame::receiveInput() {
 	switch(key) {
 		case KEY_UP :
 			spaceShip.moveUp();
-			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
 			break;
 		case KEY_DOWN :
 			spaceShip.moveDown();
-			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
 			break;
 		case KEY_RIGHT :
 			spaceShip.moveRight();
-			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
 			break;
 		case KEY_LEFT :
 			spaceShip.moveLeft();
-			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
 			break;
 	}
-	flushinp();
 }
 
 void RetroGame::controlCycle() {
@@ -124,7 +119,7 @@ void RetroGame::controlCycle() {
 		else
 			iterator = iterator->getNext();
 	}
-	receiveInput(); // TODO: get input keys
+	receiveInput();
 }
 
 void RetroGame::renderCycle() {

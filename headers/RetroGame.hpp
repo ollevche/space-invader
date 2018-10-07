@@ -17,7 +17,7 @@
 
 # define STAGEW 100
 # define STAGEH 75
-# define CYCLEDELAY 10000
+# define CYCLEDELAY 20000
 
 class AGameEntity;
 struct EntityList;

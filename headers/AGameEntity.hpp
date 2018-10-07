@@ -15,6 +15,10 @@
 
 # include "general.hpp"
 
+# define NONEDIR	0
+# define UPDIR		1
+# define DOWNDIR	2
+
 class AGameEntity {
 
 	public:
@@ -41,12 +45,12 @@ class AGameEntity {
 
 		int		x;
 		int		y;
-		int		color;
 		char	*shape;
 
 		int		inactive;
 		int		maxInactive;
 		bool	isDead;
+		int		direction;
 
 };
 
