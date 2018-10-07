@@ -39,7 +39,6 @@ void Boulder::renderEntity(RetroGame & theGame) {
 
 void Boulder::executeEntity(RetroGame & theGame) {
 	(void)theGame;
-	// TODO: check collisions
 	inactive++;
 	if (inactive > maxInactive)
 	{

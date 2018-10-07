@@ -35,9 +35,7 @@ void SpaceShip::renderEntity(RetroGame & theGame) {
 void SpaceShip::executeEntity(RetroGame & theGame) {
 	AGameEntity *entity;
 
-	// do {
-		entity = theGame.getCollision(*this); // TODO: test it
-		if (entity)
-			isDead = true;
-	// } while (entity);
+	entity = theGame.getCollision(*this);
+	if (entity)
+		isDead = true;
 }
