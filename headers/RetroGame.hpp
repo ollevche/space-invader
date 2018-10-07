@@ -15,8 +15,8 @@
 
 # include "general.hpp"
 
-# define STAGEW		100
-# define STAGEH		75
+# define STAGEW		75
+# define STAGEH		45
 # define CYCLEDELAY	20000
 # define SPAWNRATE	20
 
@@ -34,6 +34,7 @@ class RetroGame {
 		RetroGame & operator=(RetroGame const & src);
 
 		void			playGame();
+		void			addEntity(AGameEntity & entity);
 		WINDOW &		getStage() const;
 		AGameEntity		*getCollision(AGameEntity & elem) const;
 

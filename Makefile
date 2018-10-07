@@ -20,12 +20,13 @@ OBJDIR	= objects/
 
 HDIR	= headers/
 
-HDRS	= AGameEntity.hpp Boulder.hpp general.hpp RetroGame.hpp SpaceShip.hpp
+HDRS	= AGameEntity.hpp Boulder.hpp general.hpp Missile.hpp RetroGame.hpp \
+			SpaceShip.hpp
 
 PHDR	= $(addprefix $(HDIR), $(HDRS))
 
 SRC		= AGameEntity.cpp general.cpp main.cpp RetroGame.cpp SpaceShip.cpp \
-			Boulder.cpp
+			Boulder.cpp Missile.cpp
 
 OBJ		= $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 

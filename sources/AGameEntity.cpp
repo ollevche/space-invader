@@ -41,7 +41,9 @@ bool AGameEntity::isAlive() const {
 	return !isDead;
 }
 
-bool AGameEntity::isCollide(AGameEntity & anotherOne) const { // TODO: Y collisions
+bool AGameEntity::isCollide(AGameEntity & anotherOne) const {
+	if (direction == anotherOne.direction)
+		return false;
 	if (anotherOne.x != x)
 		return false;
 	if (anotherOne.y == y + 1)
@@ -86,9 +88,16 @@ bool AGameEntity::moveLeft() {
 AGameEntity & AGameEntity::operator=(AGameEntity const & src) {
 	x = src.x;
 	y = src.y;
-	shape = src.shape;
+	shape = strdup(src.shape);
 	inactive = src.inactive;
 	maxInactive = src.maxInactive;
 	isDead = src.isDead;
 	return *this;
+}
+
+void AGameEntity::shot(RetroGame & theGame) {
+	AGameEntity *missile;
+
+	missile = new Missile(x, y, direction);
+	theGame.addEntity(*missile);
 }

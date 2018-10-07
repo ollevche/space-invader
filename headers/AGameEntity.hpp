@@ -39,6 +39,8 @@ class AGameEntity {
 		bool			moveRight();
 		bool			moveLeft();
 
+		void			shot(RetroGame & theGame);
+
 		AGameEntity & operator=(AGameEntity const & src);
 
 	protected:

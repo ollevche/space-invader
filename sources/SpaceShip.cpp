@@ -18,6 +18,7 @@ SpaceShip::SpaceShip() {
 	x = STAGEW / 2;
 	y = STAGEH - STAGEH / 10;
 	shape = strdup(SHAPE);
+	direction = UPDIR;
 }
 
 SpaceShip::SpaceShip(SpaceShip const & src) {

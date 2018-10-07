@@ -20,6 +20,9 @@
 # include "AGameEntity.hpp"
 # include "Boulder.hpp"
 # include "SpaceShip.hpp"
+# include "Missile.hpp"
+
+# define KEY_SPACE ' '
 
 struct EntityList {
 

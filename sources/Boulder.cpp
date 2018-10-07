@@ -15,7 +15,7 @@
 # define SHAPE "O"
 
 Boulder::Boulder() {
-	x = std::rand() % STAGEW;
+	x = std::rand() % (STAGEW - 1);
 	if (x == 0)
 		x++;
 	y = 0;

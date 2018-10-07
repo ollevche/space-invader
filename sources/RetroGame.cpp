@@ -90,6 +90,14 @@ void RetroGame::executeCycle() {
 	}
 }
 
+void RetroGame::addEntity(AGameEntity & entity) {
+	EntityList *list = pool;
+
+	while (!list->isLast())
+		list = list->getNext();
+	list->add(entity);
+}
+
 void RetroGame::receiveInput() {
 	int				key;
 	AGameEntity &	spaceShip = pool->getEntity();
@@ -108,11 +116,12 @@ void RetroGame::receiveInput() {
 		case KEY_LEFT :
 			spaceShip.moveLeft();
 			break;
+		case KEY_SPACE :
+			spaceShip.shot(*this);
 	}
 }
 
-void RetroGame::addEnemies() {
-	EntityList *list = pool;
+void RetroGame::addEnemies() { // TODO: not only boulders
 	AGameEntity *boulder;
 
 	if (lastSpawn < SPAWNRATE)
@@ -121,10 +130,8 @@ void RetroGame::addEnemies() {
 		return;
 	}
 	lastSpawn = 0;
-	while (!list->isLast())
-		list = list->getNext();
 	boulder = new Boulder();
-	list->add(*boulder);
+	addEntity(*boulder);
 }
 
 void RetroGame::controlCycle() {
