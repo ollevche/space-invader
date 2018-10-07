@@ -69,14 +69,18 @@ RetroGame & RetroGame::operator=(RetroGame const & src) {
 
 void RetroGame::playGame() {
 	AGameEntity & spaceShip = pool->getEntity();
+	clock_t start, diff;
 
 	while (spaceShip.isAlive()) {
+		start = clock();
 		executeCycle();
 		controlCycle();
 		renderCycle();
 		wrefresh(gameStage);
 		refresh();
-		usleep(CYCLEDELAY);
+		diff = clock() - start;
+		if (diff < CYCLEDELAY)
+			usleep(CYCLEDELAY - diff);
 	}
 }
 
