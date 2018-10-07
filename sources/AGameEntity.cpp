@@ -16,7 +16,6 @@ AGameEntity::AGameEntity() {
     y = 0;
     x = 0; // TODO: default random x based on windows size
     color = 0;
-    shape = "§"; // TODO: defines
     inactive = 0;
     maxInactive = -1;
     isDead = false;

@@ -20,8 +20,10 @@ RetroGame::RetroGame() {
 	AGameEntity* spaceShip = new SpaceShip(); // TODO: delete it
 	pool = new EntityList(*spaceShip); // TODO: delete it
 	initscr();
-	gameStage = newwin(100, 500, 0, 0); // TODO: defines
-	statsBar = newwin(100, 50, 0 + 100, 0 + 500); // TODO: test sizes
+	cbreak();
+	noecho();
+	curs_set(0);
+	gameStage = newwin(STAGEH, STAGEW, 0, 0); // TODO: defines
 }
 
 RetroGame::RetroGame(RetroGame const & src) {
@@ -30,7 +32,7 @@ RetroGame::RetroGame(RetroGame const & src) {
 
 RetroGame::~RetroGame() {
 	delwin(gameStage);
-	delwin(statsBar);
+	endwin();
 }
 
 RetroGame & RetroGame::operator=(RetroGame const & src) {
@@ -44,8 +46,7 @@ RetroGame & RetroGame::operator=(RetroGame const & src) {
 		pool = pool->getNext();
 		elem = elem->getNext();
 	}
-	gameStage = src.gameStage; // TODO: check this (gameStage and statsBar will be killed with destructor)
-	statsBar = src.statsBar; // it should be done by creating new windows
+	gameStage = newwin(STAGEH, STAGEW, 0, 0);
 	return *this;
 }
 
@@ -60,6 +61,7 @@ void RetroGame::playGame() {
 		executeCycle();
 		controlCycle();
 		renderCycle();
+		usleep(100000);
 	}
 }
 
@@ -95,7 +97,7 @@ void RetroGame::renderCycle() {
 	AGameEntity	*gameEntity;
 
 	wclear(gameStage);
-	box(gameStage, '|', '-');
+	box(gameStage, 0, 0);
 	iterator = pool;
 	while (iterator) {
 		gameEntity = &(iterator->getEntity());
@@ -103,7 +105,7 @@ void RetroGame::renderCycle() {
 		iterator = iterator->getNext();
 	}
 	wrefresh(gameStage);
-	while (true);
+	refresh();
 	// TODO: statsBar update
 }
 

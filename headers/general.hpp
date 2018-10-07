@@ -15,6 +15,7 @@
 
 # include <ncurses.h>
 # include <string>
+# include <unistd.h>
 # include "RetroGame.hpp"
 # include "AGameEntity.hpp"
 # include "Boulder.hpp"

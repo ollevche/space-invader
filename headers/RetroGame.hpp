@@ -15,6 +15,9 @@
 
 # include "general.hpp"
 
+# define STAGEW 100
+# define STAGEH 75
+
 class AGameEntity;
 struct EntityList;
 
@@ -37,7 +40,7 @@ class RetroGame {
 
 		EntityList	*pool;
 		WINDOW		*gameStage;
-		WINDOW		*statsBar;
+		// WINDOW		*statsBar;
 
 		void	executeCycle();
 		void	controlCycle();

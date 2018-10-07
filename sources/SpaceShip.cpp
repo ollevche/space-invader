@@ -12,10 +12,12 @@
 
 #include "general.hpp"
 
+# define SHAPE "/^\\"
+
 SpaceShip::SpaceShip() {
     // TODO: x and y default values based on windows size
     // color =
-    shape = "^"; // TODO: defines
+    shape = strdup(SHAPE); // TODO: defines
 }
 
 SpaceShip::SpaceShip(SpaceShip const & src) {
@@ -24,11 +26,16 @@ SpaceShip::SpaceShip(SpaceShip const & src) {
 
 SpaceShip::~SpaceShip() {
     /* DEFAULT DESTRUCTOR */
+    delete shape;
 }
 
 void SpaceShip::renderEntity(RetroGame & theGame) {
-    mvwprintw(&theGame.getStage(), y, x, "^");
+    mvwprintw(&theGame.getStage(), y, x, shape); // DEL
+    mvwprintw(&theGame.getStage(), STAGEH / 2, STAGEW / 2, "%d", x); // DEL
 }
 void SpaceShip::executeEntity(RetroGame & theGame) {
     (void)theGame; // TODO: this
+    x++; // DEL
+    if (x > STAGEW)
+        isDead = true;
 }

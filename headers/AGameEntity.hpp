@@ -34,10 +34,10 @@ class AGameEntity {
 
 	protected:
 
-		int			x;
-		int			y;
-		int			color;
-		std::string	shape;
+		int		x;
+		int		y;
+		int		color;
+		char	*shape;
 
 		int		inactive;
 		int		maxInactive;
