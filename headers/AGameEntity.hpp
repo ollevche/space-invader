@@ -32,7 +32,7 @@ class AGameEntity {
 
 		bool			kill();
 		bool			isAlive() const;
-		bool			isCollide(AGameEntity & anotherOne) const;
+		virtual bool	isCollide(AGameEntity & anotherOne) const;
 
 		bool			moveUp();
 		bool			moveDown();

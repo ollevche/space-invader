@@ -20,11 +20,13 @@ RetroGame::RetroGame() {
 	AGameEntity* spaceShip = new SpaceShip();
 	pool = new EntityList(*spaceShip);
 	lastSpawn = 0;
+	starCount = 0;
 
 	initscr();
 	cbreak();
 	noecho();
 	curs_set(0);
+	start_color();
 	gameStage = newwin(STAGEH, STAGEW, 0, 0);
 	nodelay(gameStage, true);
 	keypad(gameStage, true);
@@ -121,7 +123,17 @@ void RetroGame::receiveInput() {
 	}
 }
 
-void RetroGame::addEnemies() { // TODO: not only boulders
+void RetroGame::addStar() {
+	AGameEntity *star;
+
+	if (starCount >= MAXSTAR)
+		return;
+	starCount++;
+	star = new Star();
+	addEntity(*star);
+}
+
+void RetroGame::addBoulder() {
 	AGameEntity *boulder;
 
 	if (lastSpawn < SPAWNRATE)
@@ -147,7 +159,8 @@ void RetroGame::controlCycle() {
 			iterator = iterator->getNext();
 	}
 	receiveInput();
-	addEnemies();
+	addBoulder();
+	addStar();
 }
 
 void RetroGame::renderCycle() {
@@ -155,7 +168,8 @@ void RetroGame::renderCycle() {
 	AGameEntity	*gameEntity;
 
 	wclear(gameStage);
-	box(gameStage, 0, 0);
+	// box(gameStage, 0, 0);
+	system("printf '\e[8;45;75t'");
 	iterator = pool;
 	while (iterator) {
 		gameEntity = &(iterator->getEntity());

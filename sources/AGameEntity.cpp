@@ -42,7 +42,7 @@ bool AGameEntity::isAlive() const {
 }
 
 bool AGameEntity::isCollide(AGameEntity & anotherOne) const {
-	if (direction == anotherOne.direction)
+	if (anotherOne.direction == NONEDIR || direction == anotherOne.direction)
 		return false;
 	if (anotherOne.x != x)
 		return false;

@@ -17,8 +17,9 @@
 
 # define STAGEW		75
 # define STAGEH		45
-# define CYCLEDELAY	20000
+# define CYCLEDELAY	35000
 # define SPAWNRATE	20
+# define MAXSTAR	7
 
 class AGameEntity;
 struct EntityList;
@@ -44,11 +45,13 @@ class RetroGame {
 		EntityList	*pool;
 		WINDOW		*gameStage;
 		int			lastSpawn;
+		int			starCount;
 		// WINDOW		*statsBar;
 
 		void	executeCycle();
 		void	receiveInput();
-		void	addEnemies();
+		void	addBoulder();
+		void	addStar();
 		void	controlCycle();
 		void	renderCycle();
 

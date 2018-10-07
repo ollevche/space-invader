@@ -21,6 +21,7 @@
 # include "Boulder.hpp"
 # include "SpaceShip.hpp"
 # include "Missile.hpp"
+# include "Star.hpp"
 
 # define KEY_SPACE ' '
 
