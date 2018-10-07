@@ -17,6 +17,7 @@
 
 # define STAGEW 100
 # define STAGEH 75
+# define CYCLEDELAY 10000
 
 class AGameEntity;
 struct EntityList;
@@ -43,6 +44,7 @@ class RetroGame {
 		// WINDOW		*statsBar;
 
 		void	executeCycle();
+		void	receiveInput();
 		void	controlCycle();
 		void	renderCycle();
 

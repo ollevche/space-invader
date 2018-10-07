@@ -22,7 +22,7 @@ EntityList::EntityList(AGameEntity & elemEntity) : entity(elemEntity) {
 }
 
 void EntityList::add(AGameEntity & elem) {
-	next = new EntityList(elem); // TODO: delete it
+	next = new EntityList(elem);
 }
 
 void EntityList::setPrev(EntityList *elem) {
@@ -63,5 +63,7 @@ EntityList *EntityList::unlink() {
 		next->setPrev(prev);
 	prev = NULL;
 	next = NULL;
+	delete &entity;
+	delete this;
 	return retNextElem;
 }

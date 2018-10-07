@@ -14,7 +14,7 @@
 
 AGameEntity::AGameEntity() {
     y = 0;
-    x = 0; // TODO: default random x based on windows size
+    x = 0;
     color = 0;
     inactive = 0;
     maxInactive = -1;
@@ -46,6 +46,26 @@ bool AGameEntity::isCollide(AGameEntity & anotherOne) const { // TODO: Y collisi
     if (anotherOne.x == x - 1)
         return true;
     return false;
+}
+
+void AGameEntity::moveUp() {
+    if (y - 1 > 0)
+        y--;
+}
+
+void AGameEntity::moveDown() {
+    if (y + 2 < STAGEH)
+        y++;
+}
+
+void AGameEntity::moveRight() {
+    if (x + 2 < STAGEW)
+        x++;
+}
+
+void AGameEntity::moveLeft() {
+    if (x - 1 > 0)
+        x--;
 }
 
 AGameEntity & AGameEntity::operator=(AGameEntity const & src) {

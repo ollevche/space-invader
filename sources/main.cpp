@@ -14,8 +14,11 @@
 
 int main()
 {
- 	RetroGame game;
+ 	RetroGame *game;
 
-	game = RetroGame();
-	game.playGame();
+	game = new RetroGame();
+	game->playGame();
+	delete game;
+	game = NULL;
+	system("leaks ft_retro");
 }

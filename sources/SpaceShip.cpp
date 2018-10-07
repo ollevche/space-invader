@@ -12,12 +12,13 @@
 
 #include "general.hpp"
 
-# define SHAPE "/^\\"
+# define SHAPE "^"
 
 SpaceShip::SpaceShip() {
-    // TODO: x and y default values based on windows size
-    // color =
-    shape = strdup(SHAPE); // TODO: defines
+    x = STAGEW / 2;
+    y = STAGEH - STAGEH / 10;
+    // TODO: color =
+    shape = strdup(SHAPE);
 }
 
 SpaceShip::SpaceShip(SpaceShip const & src) {
@@ -30,12 +31,9 @@ SpaceShip::~SpaceShip() {
 }
 
 void SpaceShip::renderEntity(RetroGame & theGame) {
-    mvwprintw(&theGame.getStage(), y, x, shape); // DEL
-    mvwprintw(&theGame.getStage(), STAGEH / 2, STAGEW / 2, "%d", x); // DEL
+    mvwprintw(&theGame.getStage(), y, x, shape);
 }
+
 void SpaceShip::executeEntity(RetroGame & theGame) {
     (void)theGame; // TODO: this
-    x++; // DEL
-    if (x > STAGEW)
-        isDead = true;
 }

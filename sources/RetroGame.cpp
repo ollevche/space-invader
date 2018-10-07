@@ -17,13 +17,15 @@
 */
 
 RetroGame::RetroGame() {
-	AGameEntity* spaceShip = new SpaceShip(); // TODO: delete it
-	pool = new EntityList(*spaceShip); // TODO: delete it
+	AGameEntity* spaceShip = new SpaceShip();
+	pool = new EntityList(*spaceShip);
 	initscr();
 	cbreak();
 	noecho();
 	curs_set(0);
-	gameStage = newwin(STAGEH, STAGEW, 0, 0); // TODO: defines
+	gameStage = newwin(STAGEH, STAGEW, 0, 0);
+	nodelay(gameStage, true);
+	keypad(gameStage, true);
 }
 
 RetroGame::RetroGame(RetroGame const & src) {
@@ -31,6 +33,11 @@ RetroGame::RetroGame(RetroGame const & src) {
 }
 
 RetroGame::~RetroGame() {
+	EntityList *iterator;
+
+	iterator = pool;
+	while (iterator)
+		iterator = iterator->unlink();
 	delwin(gameStage);
 	endwin();
 }
@@ -39,7 +46,7 @@ RetroGame & RetroGame::operator=(RetroGame const & src) {
 	EntityList *elem;
 
 	elem = src.pool;
-	pool = new EntityList(elem->getEntity()); // TODO: delete it
+	pool = new EntityList(elem->getEntity());
 	elem = elem->getNext();
 	while (elem && !elem->isLast()) {
 		pool->add(elem->getEntity());
@@ -59,9 +66,11 @@ void RetroGame::playGame() {
 
 	while (spaceShip.isAlive()) {
 		executeCycle();
-		controlCycle();
 		renderCycle();
-		usleep(100000);
+		controlCycle();
+		wrefresh(gameStage);
+		refresh();
+		usleep(CYCLEDELAY);
 	}
 }
 
@@ -77,6 +86,32 @@ void RetroGame::executeCycle() {
 	}
 }
 
+void RetroGame::receiveInput() {
+	int				key;
+	AGameEntity &	spaceShip = pool->getEntity();
+
+	key = wgetch(gameStage);
+	switch(key) {
+		case KEY_UP :
+			spaceShip.moveUp();
+			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
+			break;
+		case KEY_DOWN :
+			spaceShip.moveDown();
+			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
+			break;
+		case KEY_RIGHT :
+			spaceShip.moveRight();
+			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
+			break;
+		case KEY_LEFT :
+			spaceShip.moveLeft();
+			mvwprintw(gameStage, 1, 1, "KEY PRESSED!!!");
+			break;
+	}
+	flushinp();
+}
+
 void RetroGame::controlCycle() {
 	EntityList	*iterator;
 	AGameEntity	*gameEntity;
@@ -89,7 +124,7 @@ void RetroGame::controlCycle() {
 		else
 			iterator = iterator->getNext();
 	}
-	// TODO: get input keys
+	receiveInput(); // TODO: get input keys
 }
 
 void RetroGame::renderCycle() {
@@ -104,8 +139,6 @@ void RetroGame::renderCycle() {
 		gameEntity->renderEntity(*this);
 		iterator = iterator->getNext();
 	}
-	wrefresh(gameStage);
-	refresh();
 	// TODO: statsBar update
 }
 

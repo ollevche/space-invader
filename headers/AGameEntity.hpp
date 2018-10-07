@@ -21,7 +21,7 @@ class AGameEntity {
 
 		AGameEntity();
 		AGameEntity(AGameEntity const & src);
-		~AGameEntity();
+		virtual ~AGameEntity();
 
 		virtual void	renderEntity(RetroGame & theGame) = 0;
 		virtual void	executeEntity(RetroGame & theGame) = 0;
@@ -29,6 +29,11 @@ class AGameEntity {
 		bool			kill();
 		bool			isAlive() const;
 		bool			isCollide(AGameEntity & anotherOne) const;
+
+		void			moveUp();
+		void			moveDown();
+		void			moveRight();
+		void			moveLeft();
 
 		AGameEntity & operator=(AGameEntity const & src);
 
