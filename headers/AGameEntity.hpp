@@ -34,10 +34,10 @@ class AGameEntity {
 		bool			isAlive() const;
 		bool			isCollide(AGameEntity & anotherOne) const;
 
-		void			moveUp();
-		void			moveDown();
-		void			moveRight();
-		void			moveLeft();
+		bool			moveUp();
+		bool			moveDown();
+		bool			moveRight();
+		bool			moveLeft();
 
 		AGameEntity & operator=(AGameEntity const & src);
 

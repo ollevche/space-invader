@@ -22,7 +22,11 @@ EntityList::EntityList(AGameEntity & elemEntity) : entity(elemEntity) {
 }
 
 void EntityList::add(AGameEntity & elem) {
-	next = new EntityList(elem);
+	EntityList *newElem;
+
+	newElem = new EntityList(elem);
+	newElem->setPrev(this);
+	next = newElem;
 }
 
 void EntityList::setPrev(EntityList *elem) {

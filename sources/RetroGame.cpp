@@ -19,6 +19,8 @@
 RetroGame::RetroGame() {
 	AGameEntity* spaceShip = new SpaceShip();
 	pool = new EntityList(*spaceShip);
+	lastSpawn = 0;
+
 	initscr();
 	cbreak();
 	noecho();
@@ -26,6 +28,8 @@ RetroGame::RetroGame() {
 	gameStage = newwin(STAGEH, STAGEW, 0, 0);
 	nodelay(gameStage, true);
 	keypad(gameStage, true);
+
+	std::srand(time(NULL));
 }
 
 RetroGame::RetroGame(RetroGame const & src) {
@@ -66,8 +70,8 @@ void RetroGame::playGame() {
 
 	while (spaceShip.isAlive()) {
 		executeCycle();
-		renderCycle();
 		controlCycle();
+		renderCycle();
 		wrefresh(gameStage);
 		refresh();
 		usleep(CYCLEDELAY);
@@ -107,6 +111,22 @@ void RetroGame::receiveInput() {
 	}
 }
 
+void RetroGame::addEnemies() {
+	EntityList *list = pool;
+	AGameEntity *boulder;
+
+	if (lastSpawn < SPAWNRATE)
+	{
+		lastSpawn++;
+		return;
+	}
+	lastSpawn = 0;
+	while (!list->isLast())
+		list = list->getNext();
+	boulder = new Boulder();
+	list->add(*boulder);
+}
+
 void RetroGame::controlCycle() {
 	EntityList	*iterator;
 	AGameEntity	*gameEntity;
@@ -114,12 +134,13 @@ void RetroGame::controlCycle() {
 	iterator = pool->getNext();
 	while (iterator) {
 		gameEntity = &(iterator->getEntity());
-		if (gameEntity->isAlive())
+		if (!gameEntity->isAlive())
 			iterator = iterator->unlink();
 		else
 			iterator = iterator->getNext();
 	}
 	receiveInput();
+	addEnemies();
 }
 
 void RetroGame::renderCycle() {
@@ -148,8 +169,9 @@ AGameEntity *RetroGame::getCollision(AGameEntity & elem) const {
 	iterator = pool;
 	while (iterator) {
 		gameEntity = &(iterator->getEntity());
-		if (gameEntity->isCollide(elem))
-			return gameEntity;
+		if (gameEntity != &elem)
+			if (gameEntity->isCollide(elem))
+				return gameEntity;
 		iterator = iterator->getNext();
 	}
 	return NULL;

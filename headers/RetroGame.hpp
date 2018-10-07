@@ -15,9 +15,10 @@
 
 # include "general.hpp"
 
-# define STAGEW 100
-# define STAGEH 75
-# define CYCLEDELAY 20000
+# define STAGEW		100
+# define STAGEH		75
+# define CYCLEDELAY	20000
+# define SPAWNRATE	20
 
 class AGameEntity;
 struct EntityList;
@@ -41,10 +42,12 @@ class RetroGame {
 
 		EntityList	*pool;
 		WINDOW		*gameStage;
+		int			lastSpawn;
 		// WINDOW		*statsBar;
 
 		void	executeCycle();
 		void	receiveInput();
+		void	addEnemies();
 		void	controlCycle();
 		void	renderCycle();
 

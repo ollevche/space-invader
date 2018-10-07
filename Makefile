@@ -24,7 +24,8 @@ HDRS	= AGameEntity.hpp Boulder.hpp general.hpp RetroGame.hpp SpaceShip.hpp
 
 PHDR	= $(addprefix $(HDIR), $(HDRS))
 
-SRC		= AGameEntity.cpp general.cpp main.cpp RetroGame.cpp SpaceShip.cpp
+SRC		= AGameEntity.cpp general.cpp main.cpp RetroGame.cpp SpaceShip.cpp \
+			Boulder.cpp
 
 OBJ		= $(addprefix $(OBJDIR), $(SRC:.cpp=.o))
 

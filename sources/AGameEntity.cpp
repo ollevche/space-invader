@@ -42,31 +42,45 @@ bool AGameEntity::isAlive() const {
 }
 
 bool AGameEntity::isCollide(AGameEntity & anotherOne) const { // TODO: Y collisions
-	if (anotherOne.x == x + 1)
+	if (anotherOne.x != x)
+		return false;
+	if (anotherOne.y == y + 1)
 		return true;
-	if (anotherOne.x == x - 1)
+	if (anotherOne.y == y - 1)
 		return true;
 	return false;
 }
 
-void AGameEntity::moveUp() {
-	if (y - 1 > 0)
+bool AGameEntity::moveUp() {
+	if (y - 1 > 0) {
 		y--;
+		return true;
+	}
+	return false;
 }
 
-void AGameEntity::moveDown() {
-	if (y + 2 < STAGEH)
+bool AGameEntity::moveDown() {
+	if (y + 2 < STAGEH) {
 		y++;
+		return true;
+	}
+	return false;
 }
 
-void AGameEntity::moveRight() {
-	if (x + 2 < STAGEW)
+bool AGameEntity::moveRight() {
+	if (x + 2 < STAGEW) {
 		x++;
+		return true;
+	}
+	return false;
 }
 
-void AGameEntity::moveLeft() {
-	if (x - 1 > 0)
+bool AGameEntity::moveLeft() {
+	if (x - 1 > 0) {
 		x--;
+		return true;
+	}
+	return false;
 }
 
 AGameEntity & AGameEntity::operator=(AGameEntity const & src) {
