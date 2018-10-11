@@ -12,16 +12,9 @@
 
 #include "general.hpp"
 
-#include "menu.hpp"
-
 int main()
 {
  	RetroGame *game;
-	menu *m;
-
-	m = new menu();
-	m->start();
-	delete m;
 	game = new RetroGame();
 	game->playGame();
 	delete game;
