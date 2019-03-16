@@ -13,8 +13,10 @@
 #ifndef GENERAL_HPP
 # define GENERAL_HPP
 
+# include <cstdlib>
+# include <ctime>
 # include <ncurses.h>
-# include <string>
+# include <cstring>
 # include <unistd.h>
 # include "RetroGame.hpp"
 # include "AGameEntity.hpp"
